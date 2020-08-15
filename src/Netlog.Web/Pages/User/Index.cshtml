@@ -1,0 +1,64 @@
+﻿@page
+@model Netlog.Web.Pages.User.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>User List</h1>
+
+<form method="get">
+    <div class="form-group">
+        <div class="input-group">
+            <input type="search" class="form-control" asp-for="SearchTerm" />
+            <span class="input-group-btn">
+                <button class="btn btn-default">
+                    Search
+                </button>
+            </span>
+        </div>
+    </div>
+</form>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Address</th>
+            <th scope="col">Picture</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var User in Model.UserList)
+        {
+            <tr>
+                <th scope="row">@User.ID</th>
+                <td>@User.FirstName</td>
+                <td>@User.LastName</td>
+                <td>@User.PhoneNumber</td>
+                <td>@User.Address</td>
+                <td><img width="50" src="@User.profilepicture" /> </td>
+                <td>
+                    <a class="btn"
+                       asp-page="./Edit"
+                       asp-route-UserId="@User.ID">
+                        Edit
+                    </a>
+                    <a class="btn"
+                       asp-page="./Delete"
+                       asp-route-UserId="@User.ID">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

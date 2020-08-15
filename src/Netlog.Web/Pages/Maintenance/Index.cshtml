@@ -1,0 +1,49 @@
+﻿@page
+@model Netlog.Web.Pages.Maintenance.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Bakım Raporları</h1>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Plaka</th>
+            <th scope="col">Araç Tipi</th>
+            <th scope="col">Açıklama</th>
+            <th scope="col">Kullanıcı</th>
+            <th scope="col">Resim</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Maintenance in Model.MaintenanceList)
+        {
+        <tr>
+            <td>@Maintenance.VehicleName</td>
+            <td>@Maintenance.VehicleType</td>
+            <td>@Maintenance.Description</td>
+            <td>@Maintenance.UserName</td>
+            <td><img width="50" src="@Maintenance.Picture" /> </td>
+            <td>
+                <a class="btn"
+                   asp-page="./Details"
+                   asp-route-MaintenanceId="@Maintenance.ID">
+                    Details
+                </a>
+                @*<a class="btn"
+               asp-page="./Edit"
+               asp-route-MaintenanceId="@Maintenance.ID">
+                Edit
+            </a>
+            <a class="btn"
+               asp-page="./Delete"
+               asp-route-MaintenanceId="@Maintenance.ID">
+                Delete
+            </a>*@
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
